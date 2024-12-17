@@ -46,3 +46,20 @@ function adicionarComentario() {
 
 // Carregar os comentários quando a página for carregada
 document.addEventListener('DOMContentLoaded', carregarComentarios);
+
+
+        // Defina o shortname do seu fórum
+        var disqus_shortname = 'galeria-4';  // Substitua com o seu shortname
+
+        // Função de configuração
+        var disqus_config = function () {
+            this.page.url = window.location.href;  // A URL da página
+            this.page.identifier = 'unique-page-id';  // Identificador único para cada página/foto
+        };
+
+        (function () {  // Adiciona o script do Disqus
+            var s = document.createElement('script');
+            s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (document.head || document.body).appendChild(s);
+        })();
