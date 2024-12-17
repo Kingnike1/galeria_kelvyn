@@ -17,3 +17,32 @@
          document.body.classList.add('dark-mode');
      }
  });
+
+// Função para carregar os comentários armazenados
+function carregarComentarios() {
+    const comentarios = JSON.parse(localStorage.getItem('comentarios')) || [];
+    const comentariosContainer = document.getElementById('comentarios');
+    comentariosContainer.innerHTML = ''; // Limpar a área de comentários
+
+    comentarios.forEach(comentario => {
+        const divComentario = document.createElement('div');
+        divComentario.classList.add('comentario');
+        divComentario.textContent = comentario;
+        comentariosContainer.appendChild(divComentario);
+    });
+}
+
+// Função para adicionar um novo comentário
+function adicionarComentario() {
+    const novoComentario = document.getElementById('novoComentario').value;
+    if (novoComentario.trim() !== '') {
+        const comentarios = JSON.parse(localStorage.getItem('comentarios')) || [];
+        comentarios.push(novoComentario);
+        localStorage.setItem('comentarios', JSON.stringify(comentarios));
+        document.getElementById('novoComentario').value = ''; // Limpar o campo de entrada
+        carregarComentarios(); // Recarregar os comentários
+    }
+}
+
+// Carregar os comentários quando a página for carregada
+document.addEventListener('DOMContentLoaded', carregarComentarios);

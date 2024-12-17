@@ -82,3 +82,33 @@ footer a:hover {
 footer i {
     margin-right: 5px;
 }
+
+#comentariosContainer {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.comentario {
+    margin-bottom: 10px;
+    padding: 8px;
+    background-color: #eaeaea;
+    border-radius: 5px;
+}
+
+#novoComentario {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
