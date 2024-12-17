@@ -60,17 +60,36 @@
             <span class="visually-hidden">Próximo</span>
         </button>
     </div>
+    <div id="disqus_thread"></div>
     <section class="galeria animate__animated animate__fadeInUp">
         <!-- Substitua os links abaixo pelas fotos desejadas -->
         <img src="./img/Butterfly .jpg" alt="Foto 1" class="img-fluid animate__animated animate__zoomIn">
+        <div id="disqus_count_Butterfly"></div>
+        <div id="disqus_thread_Butterfly"></div>
         <img src="./img/Lightning Bolt .jpg" alt="Foto 2" class="img-fluid animate__animated animate__zoomIn">
+        <div id="disqus_count_Butterfly"></div>
+        <div id="disqus_thread_Butterfly"></div>
         <img src="./img/Pink Splash Flower.jpg" alt="Foto 3" class="img-fluid animate__animated animate__zoomIn">
+        <div id="disqus_count_Butterfly"></div>
+        <div id="disqus_thread_Butterfly"></div>
         <img src="./img/Sunset Light.jpg" alt="Foto 4" class="img-fluid animate__animated animate__zoomIn">
+        <div id="disqus_count_Butterfly"></div>
+        <div id="disqus_thread_Butterfly"></div>
         <img src="./img/The Bee.jpg" alt="Foto 5" class="img-fluid animate__animated animate__zoomIn">
+        <div id="disqus_count_Butterfly"></div>
+        <div id="disqus_thread_Butterfly"></div>
         <img src="./img/The Cat.jpg" alt="Foto 6" class="img-fluid animate__animated animate__zoomIn">
+        <div id="disqus_count_Butterfly"></div>
+        <div id="disqus_thread_Butterfly"></div>
         <img src="./img/The Girl with the Horse .jpg" alt="Foto 7" class="img-fluid animate__animated animate__zoomIn">
+        <div id="disqus_count_Butterfly"></div>
+        <div id="disqus_thread_Butterfly"></div>
         <img src="./img/The Green Eyes.jpg" alt="Foto 8" class="img-fluid animate__animated animate__zoomIn">
+        <div id="disqus_count_Butterfly"></div>
+        <div id="disqus_thread_Butterfly"></div>
         <img src="./img/White Flower.jpg" alt="Foto 9" class="img-fluid animate__animated animate__zoomIn">
+        <div id="disqus_count_Butterfly"></div>
+        <div id="disqus_thread_Butterfly"></div>
 
         <div id="comentariosContainer">
             <h3>Comentários</h3>
@@ -78,7 +97,7 @@
             <input type="text" id="novoComentario" placeholder="Escreva um comentário...">
             <button onclick="adicionarComentario()">Adicionar Comentário</button>
         </div>
-        
+
     </section>
 
     <!-- Footer -->
@@ -90,6 +109,24 @@
             </a>
         </div>
     </footer>
+
+    <script>
+        // Defina o shortname do seu fórum
+        var disqus_shortname = 'galeria-4';  // Substitua com o seu shortname
+
+        // Função de configuração
+        var disqus_config = function () {
+            this.page.url = window.location.href;  // A URL da página
+            this.page.identifier = 'unique-page-id';  // Identificador único para cada página/foto
+        };
+
+        (function () {  // Adiciona o script do Disqus
+            var s = document.createElement('script');
+            s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (document.head || document.body).appendChild(s);
+        })();
+    </script>
 
     <!-- Bootstrap JS -->
     <script src="script.js"></script>
