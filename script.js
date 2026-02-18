@@ -1,48 +1,7 @@
- // Alternar Tema Claro/Escuro
- const themeToggle = document.getElementById('themeToggle');
- themeToggle.addEventListener('click', () => {
-     document.body.classList.toggle('dark-mode');
-     // Salvar a preferência do tema no localStorage
-     if (document.body.classList.contains('dark-mode')) {
-         localStorage.setItem('theme', 'dark');
-     } else {
-         localStorage.setItem('theme', 'light');
-     }
- });
-
- // Verificar preferência salva no localStorage
- document.addEventListener('DOMContentLoaded', () => {
-     const savedTheme = localStorage.getItem('theme');
-     if (savedTheme === 'dark') {
-         document.body.classList.add('dark-mode');
-     }
- });
-
-// Função para carregar os comentários armazenados
-function carregarComentarios() {
-    const comentarios = JSON.parse(localStorage.getItem('comentarios')) || [];
-    const comentariosContainer = document.getElementById('comentarios');
-    comentariosContainer.innerHTML = ''; // Limpar a área de comentários
-
-    comentarios.forEach(comentario => {
-        const divComentario = document.createElement('div');
-        divComentario.classList.add('comentario');
-        divComentario.textContent = comentario;
-        comentariosContainer.appendChild(divComentario);
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute("href"))
+          .scrollIntoView({ behavior: "smooth" });
+      });
     });
-}
-
-// Função para adicionar um novo comentário
-function adicionarComentario() {
-    const novoComentario = document.getElementById('novoComentario').value;
-    if (novoComentario.trim() !== '') {
-        const comentarios = JSON.parse(localStorage.getItem('comentarios')) || [];
-        comentarios.push(novoComentario);
-        localStorage.setItem('comentarios', JSON.stringify(comentarios));
-        document.getElementById('novoComentario').value = ''; // Limpar o campo de entrada
-        carregarComentarios(); // Recarregar os comentários
-    }
-}
-
-// Carregar os comentários quando a página for carregada
-document.addEventListener('DOMContentLoaded', carregarComentarios);
