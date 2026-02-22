@@ -1,33 +1,16 @@
-const form = document.getElementById("formFoto");
+const form = document.getElementById("formUpload");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const titulo = document.getElementById("titulo").value;
-  const imageUrl = document.getElementById("imageUrl").value;
+  const formData = new FormData(form);
 
-  console.log("📤 Enviando:", { titulo, imageUrl });
+  const res = await fetch("/api/fotos", {
+    method: "POST",
+    body: formData
+  });
 
-  try {
-    const response = await fetch("http://localhost:3000/api/fotos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        titulo,
-        imageUrl
-      })
-    });
+  const data = await res.json();
 
-    const data = await response.json();
-
-    console.log("✅ Salvo no banco:", data);
-
-    alert("Foto salva com sucesso!");
-
-  } catch (error) {
-    console.log("❌ Erro:", error);
-  }
+  console.log("✅ Foto enviada:", data);
 });
-
