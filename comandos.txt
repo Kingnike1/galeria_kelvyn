@@ -56,28 +56,44 @@ touch frontend/index.html frontend/js/main.js
 13 directories, 25 files
 
 
-
 import express from "express";
-import Fotos from "../models/Photo.js"
+import Fotos from "../models/Photo.js";
+import upload from "../middlewares/upload.js";
+import cloudinary from "../services/cloudinary.js";
 
 const router = express.Router();
 
-router.post("/fotos", async (req, res) => {
-    try {
-        console.log("Dados recebidos:", req.body);
-        const {titulo, imageUrl} = req.body;
+router.post("/fotos", upload.single("image"), async (req, res) => {
+  try {
+    console.log("📥 Arquivo recebido:", req.file);
 
-        const fotos = await Fotos.create({
-            titulo,
-            imageUrl
+    // upload para cloudinary
+    const result = await cloudinary.uploader.upload_stream(
+      { resource_type: "image" },
+      async (error, result) => {
+        if (error) {
+          console.log("❌ Cloudinary erro:", error);
+          return res.status(500).json({ error });
+        }
+
+        // salvar no banco
+        const foto = await Fotos.create({
+          titulo: req.body.titulo,
+          imageUrl: result.secure_url
         });
 
-        console.log("Foto salva com sucesso:", fotos);
+        console.log("✅ Foto salva:", foto);
 
-        res.status(201).json(fotos);
+        res.status(201).json(foto);
+      }
+    );
 
-    
-    } catch (error) {
-        res.status(500).json({error: error.message});
-    }
+    result.end(req.file.buffer);
+
+  } catch (error) {
+    console.log("❌ Erro geral:", error);
+    res.status(500).json({ error: error.message });
+  }
 });
+
+export default router;
