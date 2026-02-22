@@ -25,4 +25,9 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../../frontend/index.html"))
 })
 
+
+console.log("Cloud:", process.env.CLOUD_NAME);
+console.log("Key:", process.env.API_KEY);
+console.log("Secret:", process.env.API_SECRET);
+
 export default app;
