@@ -23,6 +23,7 @@ router.post("/fotos", async (req, res) => {
     }
 });
 
+
 router.get("/fotos", async (req, res) => {
     try {
         console.log("BUcando a foto...")
