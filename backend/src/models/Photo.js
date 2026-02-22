@@ -10,9 +10,9 @@ const fotoSchema = new mongoose.Schema({
         required: true
     },
     dataCriacao: {
-        type: Date,
-        required: true
-    }
+    type: Date,
+    default: Date.now
+}
 });
 
 export default mongoose.model("fotos", fotoSchema);
