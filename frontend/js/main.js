@@ -9,7 +9,7 @@ form.addEventListener("submit", async (e) => {
   console.log("📤 Enviando:", { titulo, imageUrl });
 
   try {
-    const response = await fetch("http://localhost:3000/api/photos", {
+    const response = await fetch("http://localhost:3000/api/fotos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -30,3 +30,4 @@ form.addEventListener("submit", async (e) => {
     console.log("❌ Erro:", error);
   }
 });
+

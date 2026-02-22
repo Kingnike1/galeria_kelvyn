@@ -25,8 +25,9 @@ router.post("/fotos", async (req, res) => {
 
 router.get("/fotos", async (req, res) => {
     try {
+        console.log("BUcando a foto...")
         const fotos = await Fotos.find().sort({dataCriacao: -1});
-
+        console.log("Resultado: ", fotos)
         res.json(fotos);
 
     } catch (error) {
