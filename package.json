@@ -1,0 +1,30 @@
+{
+  "name": "galeria-kelvyn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backend/server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kingnike1/galeria_kelvyn.git"
+  },
+  "author": "Kingnike1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kingnike1/galeria_kelvyn/issues"
+  },
+  "homepage": "https://github.com/Kingnike1/galeria_kelvyn#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.2.1",
+    "multer": "^2.0.2"
+  }
+}
