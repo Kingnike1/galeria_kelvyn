@@ -12,7 +12,7 @@ const fotoSchema = new mongoose.Schema({
     dataCriacao: {
     type: Date,
     default: Date.now
-}
+    }
 });
 
-export default mongoose.model("fotos", fotoSchema);
+export default mongoose.model("Foto", fotoSchema);
