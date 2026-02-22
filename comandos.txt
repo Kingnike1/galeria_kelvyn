@@ -8,3 +8,46 @@ touch backend/src/routes/photo.routes.js && \
 touch backend/src/middlewares/upload.js && \
 touch backend/src/services/cloudinary.js && \
 touch frontend/index.html frontend/js/main.js
+
+
+ 130 kingnike1@kingnike1-Lenovo-ideapad-330-15IGM:~/Documentos/GitHub/galeria_kelvyn$ tree -I node_modules
+.
+├── backend
+│   ├── server.js
+│   └── src
+│       ├── app.js
+│       ├── config
+│       │   └── db.js
+│       ├── controllers
+│       │   └── photo.controller.js
+│       ├── middlewares
+│       │   └── upload.js
+│       ├── models
+│       │   └── Photo.js
+│       ├── routes
+│       │   └── photo.routes.js
+│       └── services
+│           └── cloudinary.js
+├── comandos.txt
+├── frontend
+│   ├── formulario.html
+│   ├── i.html
+│   ├── index.html
+│   ├── js
+│   │   └── main.js
+│   └── styles
+├── imagem.json
+├── img
+│   ├── Butterfly .jpg
+│   ├── Lightning Bolt .jpg
+│   ├── Pink Splash Flower.jpg
+│   ├── Sunset Light.jpg
+│   ├── The Bee.jpg
+│   ├── The Cat.jpg
+│   ├── The Girl with the Horse .jpg
+│   ├── The Green Eyes.jpg
+│   └── White Flower.jpg
+├── package.json
+└── package-lock.json
+
+13 directories, 25 files
