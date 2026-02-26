@@ -17,6 +17,8 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "../../frontend")));
 
+app.use("/img", express.static(path.resolve("frontend/img")));
+
 app.get("/formulario", (req, res) => {
     res.sendFile(path.join(__dirname, "../../frontend/i.html"))
 })

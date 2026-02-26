@@ -16,23 +16,30 @@ form.addEventListener("submit", async (e) => {
 });
 
 
-let fotosCarregadas = [];
-
 async function carregarFotos() {
   try {
-    const res = await fetch("/api/fotos");
-    const fotos = await res.json();
+    const [resAPI, resLocal] = await Promise.all([
+      fetch("/api/fotos"),
+      fetch("/api/fotos-locais")
+    ]);
+
+    const fotosAPI = await resAPI.json();
+    const fotosLocais = await resLocal.json();
+
+    const fotos = [...fotosLocais, ...fotosAPI];
 
     const grid = document.getElementById("galeria-grid");
 
-    // filtra só fotos novas
     const novasFotos = fotos.filter(f => 
       !fotosCarregadas.some(old => old._id === f._id)
     );
 
-    if (novasFotos.length === 0) return;
-
-    console.log("🆕 Novas fotos:", novasFotos);
+    if (novasFotos.length === 0) {
+      if (fotosCarregadas.length === 0) {
+        grid.innerHTML = '<p class="col-span-full text-center text-gray-500">Nenhuma foto disponível</p>';
+      }
+      return;
+    }
 
     novasFotos.forEach(foto => {
       const div = document.createElement("div");
@@ -46,10 +53,10 @@ async function carregarFotos() {
 
       grid.prepend(div);
 
-      // animação suave
       setTimeout(() => {
-        div.querySelector("img").classList.remove("opacity-0");
-        div.querySelector("img").classList.add("opacity-100");
+        const img = div.querySelector("img");
+        img.classList.remove("opacity-0");
+        img.classList.add("opacity-100");
       }, 100);
     });
 
