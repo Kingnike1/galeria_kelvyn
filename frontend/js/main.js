@@ -1,26 +1,9 @@
-const form = document.getElementById("formUpload");
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(form);
-
-  const res = await fetch("/api/fotos", {
-    method: "POST",
-    body: formData
-  });
-
-  const data = await res.json();
-
-  console.log("✅ Foto enviada:", data);
-});
-
-
+let fotosCarregadas = [];
 async function carregarFotos() {
   try {
     const [resAPI, resLocal] = await Promise.all([
-      fetch("/api/fotos"),
-      fetch("/api/fotos-locais")
+      fetch("http://localhost:3000/api/fotos"),
+      fetch("http://localhost:3000/api/fotos-locais")
     ]);
 
     const fotosAPI = await resAPI.json();
@@ -67,3 +50,7 @@ async function carregarFotos() {
     console.log("❌ Erro:", error);
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  carregarFotos();
+})

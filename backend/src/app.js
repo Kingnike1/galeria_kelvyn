@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import conectarDB from "./config/db.js";
 import fotoRotas from "./routes/photo.routes.js";
+import fotoRotass from "./routes/fotos.routes.js";
 import { fileURLToPath } from "url";
 
 dotenv.config();
@@ -11,6 +12,7 @@ conectarDB();
 const app = express();
 app.use(express.json());
 app.use("/api", fotoRotas);
+app.use("/api", fotoRotass);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
