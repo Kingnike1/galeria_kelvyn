@@ -48,6 +48,7 @@ async function carregarFotos() {
       div.innerHTML = `
         <img src="${foto.imageUrl}"
              alt="${foto.titulo}"
+             loading="lazy"
              class="w-full h-80 object-cover group-hover:scale-110 transition duration-700 opacity-0">
       `;
 
