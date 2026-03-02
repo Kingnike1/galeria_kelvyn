@@ -14,8 +14,15 @@ conectarDB();
 const app = express();
 
 // Configurar CORS
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "http://localhost:5174",
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
 app.use(cors({
-  origin: ["http://localhost:3000", "http://localhost:5173", "http://localhost:5174"],
+  origin: allowedOrigins,
   credentials: true
 }));
 
@@ -39,9 +46,21 @@ app.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "../../frontend/login.html"))
 })
 
+// Rota raiz - retorna mensagem de API
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../frontend/index.html"))
+    res.json({ 
+        message: "Galeria Kelvyn API",
+        version: "1.0.0",
+        status: "online"
+    });
 })
+
+// Rota para servir o frontend em produção
+if (process.env.NODE_ENV === "production") {
+    app.get("/", (req, res) => {
+        res.sendFile(path.join(__dirname, "../../frontend/index.html"))
+    })
+}
 
 
 // Logs de configuração (comentados para produção)

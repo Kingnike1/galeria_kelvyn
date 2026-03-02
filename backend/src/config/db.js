@@ -5,11 +5,11 @@ dotenv.config();
 
 async function conectarDB() {
     try {
-        await
-        mongoose.connect(process.env.moongoUrl);
-        console.log("Banco de dados conectado com sucesso!");
+        const mongoUri = process.env.MONGO_URI || "mongodb://localhost:27017/galeria_kelvyn";
+        await mongoose.connect(mongoUri);
+        console.log("✅ Banco de dados conectado com sucesso!");
     } catch (error) {
-        console.error("Erro ao conectar ao banco de dados:", error.message);
+        console.error("❌ Erro ao conectar ao banco de dados:", error.message);
         process.exit(1);
     }
 }

@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: galeria-kelvyn
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        fromDatabase:
+          name: galeria-kelvyn-db
+          property: connectionString
+      - key: CLOUD_NAME
+        sync: false
+      - key: API_KEY
+        sync: false
+      - key: API_SECRET
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        value: https://galeria-kelvyn.onrender.com
+
+databases:
+  - name: galeria-kelvyn-db
+    databaseName: galeria_kelvyn
+    user: galeria_user
