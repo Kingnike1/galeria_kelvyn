@@ -23,6 +23,16 @@
     h1, h2, h3 {
       font-family: 'Playfair Display', serif;
     }
+
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .mobile-menu.active {
+      max-height: 300px;
+    }
   </style>
 </head>
 
@@ -32,44 +42,81 @@
   <header class="fixed w-full bg-black/60 backdrop-blur-md z-50">
     <div class="max-w-7xl mx-auto flex justify-between items-center p-5">
       <h1 class="text-2xl font-bold tracking-widest">KELVYN</h1>
-      <nav class="space-x-6 hidden md:block">
+      
+      <!-- MENU DESKTOP -->
+      <nav class="space-x-6 hidden md:flex items-center">
         <a href="#galeria" class="hover:text-gray-400 transition">Galeria</a>
         <a href="#sobre" class="hover:text-gray-400 transition">Sobre</a>
         <a href="#contato" class="hover:text-gray-400 transition">Contato</a>
+        <div id="userMenuDesktop" class="hidden flex items-center gap-4">
+          <span id="userEmailDesktop" class="text-sm text-gray-300"></span>
+          <button id="logoutBtnDesktop" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition">
+            Sair
+          </button>
+        </div>
+        <a id="loginBtnDesktop" href="/login" class="px-4 py-2 border border-white hover:bg-white hover:text-black transition">
+          Login
+        </a>
       </nav>
+
+      <!-- BOTÃO MENU MOBILE -->
+      <button id="menuToggle" class="md:hidden text-2xl">
+        <i class="bi bi-list"></i>
+      </button>
     </div>
+
+    <!-- MENU MOBILE -->
+    <nav id="mobileMenu" class="mobile-menu md:hidden bg-black/80 backdrop-blur-md">
+      <div class="flex flex-col space-y-4 p-5">
+        <a href="#galeria" class="hover:text-gray-400 transition">Galeria</a>
+        <a href="#sobre" class="hover:text-gray-400 transition">Sobre</a>
+        <a href="#contato" class="hover:text-gray-400 transition">Contato</a>
+        <div id="userMenuMobile" class="hidden flex flex-col gap-3 border-t border-gray-700 pt-4">
+          <span id="userEmailMobile" class="text-sm text-gray-300"></span>
+          <button id="logoutBtnMobile" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition text-left">
+            Sair
+          </button>
+        </div>
+        <a id="loginBtnMobile" href="/login" class="px-4 py-2 border border-white hover:bg-white hover:text-black transition text-center">
+          Login
+        </a>
+      </div>
+    </nav>
   </header>
 
   <!-- HERO -->
-<section class="h-screen bg-cover bg-center flex items-center justify-center text-center"
-  style="background-image: url('./img/Sunset Light.jpg');">
+  <section class="h-screen bg-cover bg-center flex items-center justify-center text-center pt-20"
+    style="background-image: url('./img/Sunset Light.jpg');">
 
-  <div class="bg-black/60 p-10 rounded-xl backdrop-blur-md">
-    <h2 class="text-5xl md:text-7xl font-bold mb-6">Capturando Emoções</h2>
-    <p class="text-lg text-gray-300 mb-8">Fotografia artística e profissional</p>
-    <a href="#galeria"
-       class="px-8 py-3 border border-white hover:bg-white hover:text-black transition duration-500">
-       Ver Portfólio
-    </a>
-  </div>
-</section>
-
+    <div class="bg-black/60 p-8 md:p-10 rounded-xl backdrop-blur-md mx-4">
+      <h2 class="text-4xl md:text-7xl font-bold mb-6">Capturando Emoções</h2>
+      <p class="text-base md:text-lg text-gray-300 mb-8">Fotografia artística e profissional</p>
+      <a href="#galeria"
+         class="inline-block px-8 py-3 border border-white hover:bg-white hover:text-black transition duration-500">
+         Ver Portfólio
+      </a>
+    </div>
+  </section>
 
   <!-- GALERIA -->
-<section id="galeria" class="py-20 px-6 max-w-7xl mx-auto">
-  <h2 class="text-4xl text-center mb-16">Galeria</h2>
+  <section id="galeria" class="py-20 px-4 md:px-6 max-w-7xl mx-auto">
+    <h2 class="text-4xl text-center mb-16">Galeria</h2>
 
-  <div id="galeria-grid" class="grid md:grid-cols-3 gap-8">
+    <div id="galeria-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+      <!-- Fotos carregadas dinamicamente -->
+    </div>
 
-  </div>
-</section>
-
+    <!-- Mensagem de carregamento -->
+    <div id="loadingMessage" class="text-center text-gray-500 py-10">
+      <p>Carregando fotos...</p>
+    </div>
+  </section>
 
   <!-- SOBRE -->
-  <section id="sobre" class="py-20 bg-zinc-900 px-6">
+  <section id="sobre" class="py-20 bg-zinc-900 px-4 md:px-6">
     <div class="max-w-5xl mx-auto text-center">
       <h2 class="text-4xl mb-8">Sobre Mim</h2>
-      <p class="text-gray-300 leading-relaxed">
+      <p class="text-gray-300 leading-relaxed text-base md:text-lg">
         Sou fotógrafo apaixonado por transformar momentos em arte. 
         Minha missão é eternizar emoções através da lente, criando 
         imagens que contam histórias e despertam sentimentos.
@@ -78,10 +125,10 @@
   </section>
 
   <!-- CONTATO -->
-  <section id="contato" class="py-20 px-6 text-center">
+  <section id="contato" class="py-20 px-4 md:px-6 text-center">
     <h2 class="text-4xl mb-8">Contato</h2>
 
-    <div class="flex justify-center space-x-8 text-3xl">
+    <div class="flex justify-center gap-6 md:gap-8 text-2xl md:text-3xl mb-8">
       <a href="#" class="hover:text-gray-400 transition">
         <i class="bi bi-instagram"></i>
       </a>
@@ -93,12 +140,63 @@
       </a>
     </div>
 
-    <p class="text-gray-500 mt-10 text-sm">
+    <p class="text-gray-500 text-sm">
       © 2026 Kelvyn Fotografia. Todos os direitos reservados.
     </p>
   </section>
 
-  <!-- ANIMAÇÃO SUAVE -->
+  <script>
+    // 📱 Menu Mobile
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("active");
+    });
+
+    // 🔐 Verificar autenticação
+    function verificarAutenticacao() {
+      const token = localStorage.getItem("token");
+      const usuario = JSON.parse(localStorage.getItem("usuario") || "null");
+
+      const loginBtnDesktop = document.getElementById("loginBtnDesktop");
+      const loginBtnMobile = document.getElementById("loginBtnMobile");
+      const userMenuDesktop = document.getElementById("userMenuDesktop");
+      const userMenuMobile = document.getElementById("userMenuMobile");
+      const logoutBtnDesktop = document.getElementById("logoutBtnDesktop");
+      const logoutBtnMobile = document.getElementById("logoutBtnMobile");
+      const userEmailDesktop = document.getElementById("userEmailDesktop");
+      const userEmailMobile = document.getElementById("userEmailMobile");
+
+      if (token && usuario) {
+        // Usuário autenticado
+        loginBtnDesktop.classList.add("hidden");
+        loginBtnMobile.classList.add("hidden");
+        userMenuDesktop.classList.remove("hidden");
+        userMenuMobile.classList.remove("hidden");
+        userEmailDesktop.textContent = usuario.email;
+        userEmailMobile.textContent = usuario.email;
+
+        logoutBtnDesktop.addEventListener("click", logout);
+        logoutBtnMobile.addEventListener("click", logout);
+      } else {
+        // Usuário não autenticado
+        loginBtnDesktop.classList.remove("hidden");
+        loginBtnMobile.classList.remove("hidden");
+        userMenuDesktop.classList.add("hidden");
+        userMenuMobile.classList.add("hidden");
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("usuario");
+      window.location.reload();
+    }
+
+    // Chamar ao carregar a página
+    document.addEventListener("DOMContentLoaded", verificarAutenticacao);
+  </script>
 
 </body>
 </html>

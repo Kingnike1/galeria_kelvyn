@@ -1,10 +1,13 @@
 import express from "express";
 import Usuario from "../models/User.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const router = express.Router();
+const JWT_SECRET = process.env.JWT_SECRET || "sua_chave_secreta_super_segura_aqui";
 
-router.post("/usuario", async (req, res) => {
+// 📝 Registrar novo usuário
+router.post("/registro", async (req, res) => {
   try {
     const { email, senha } = req.body;
 
@@ -53,6 +56,72 @@ router.post("/usuario", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Erro interno no servidor" });
   }
+});
+
+// 🔐 Login do usuário
+router.post("/login", async (req, res) => {
+  try {
+    const { email, senha } = req.body;
+
+    // 🔍 Validações básicas
+    if (!email || !senha) {
+      return res.status(400).json({ error: "Email e senha são obrigatórios" });
+    }
+
+    // 🔎 Procurar usuário
+    const usuario = await Usuario.findOne({ email });
+
+    if (!usuario) {
+      return res.status(401).json({ error: "Email ou senha inválidos" });
+    }
+
+    // 🔓 Verificar senha
+    const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
+
+    if (!senhaCorreta) {
+      return res.status(401).json({ error: "Email ou senha inválidos" });
+    }
+
+    // 🎫 Gerar token JWT
+    const token = jwt.sign(
+      { id: usuario._id, email: usuario.email },
+      JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    res.json({
+      token,
+      usuario: {
+        _id: usuario._id,
+        email: usuario.email
+      }
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: "Erro interno no servidor" });
+  }
+});
+
+// 🔑 Middleware para verificar token
+export const verificarToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ error: "Token não fornecido" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.usuario = decoded;
+    next();
+  } catch (error) {
+    res.status(401).json({ error: "Token inválido ou expirado" });
+  }
+};
+
+// ✅ Verificar se o token é válido
+router.get("/verificar-token", verificarToken, (req, res) => {
+  res.json({ valido: true, usuario: req.usuario });
 });
 
 export default router;
