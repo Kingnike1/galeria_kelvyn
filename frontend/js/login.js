@@ -1,3 +1,8 @@
+// Obter a URL da API do ambiente ou usar localhost como padrão
+const API_URL = window.location.hostname === 'localhost' 
+  ? 'http://localhost:3000' 
+  : window.location.origin.replace(/vercel\.app/, 'onrender.com');
+
 // 🔄 Gerenciar abas
 const tabBtns = document.querySelectorAll(".tab-btn");
 const tabContents = document.querySelectorAll(".tab-content");
@@ -37,7 +42,7 @@ formLogin.addEventListener("submit", async (e) => {
   const senha = document.getElementById("loginSenha").value;
 
   try {
-    const response = await fetch("/api/login", {
+    const response = await fetch(`${API_URL}/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -86,7 +91,7 @@ formRegistro.addEventListener("submit", async (e) => {
   }
 
   try {
-    const response = await fetch("/api/registro", {
+    const response = await fetch(`${API_URL}/api/registro`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

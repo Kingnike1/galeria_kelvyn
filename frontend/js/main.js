@@ -1,5 +1,10 @@
 let fotosCarregadas = [];
 
+// Obter a URL da API do ambiente ou usar localhost como padrão
+const API_URL = window.location.hostname === 'localhost' 
+  ? 'http://localhost:3000' 
+  : window.location.origin.replace(/vercel\.app/, 'onrender.com');
+
 async function carregarFotos() {
   try {
     const loadingMessage = document.getElementById("loadingMessage");
@@ -9,7 +14,7 @@ async function carregarFotos() {
     let fotos = [];
 
     try {
-      const resAPI = await fetch("http://localhost:3000/api/fotos");
+      const resAPI = await fetch(`${API_URL}/api/fotos`);
       if (resAPI.ok) {
         const fotosAPI = await resAPI.json();
         fotos = [...fotos, ...fotosAPI];
@@ -20,7 +25,7 @@ async function carregarFotos() {
 
     // Carregar fotos locais
     try {
-      const resLocal = await fetch("http://localhost:3000/api/fotos-locais");
+      const resLocal = await fetch(`${API_URL}/api/fotos-locais`);
       if (resLocal.ok) {
         const fotosLocais = await resLocal.json();
         fotos = [...fotos, ...fotosLocais];

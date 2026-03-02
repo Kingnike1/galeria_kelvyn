@@ -1,3 +1,8 @@
+// Obter a URL da API do ambiente ou usar localhost como padrão
+const API_URL = window.location.hostname === 'localhost' 
+  ? 'http://localhost:3000' 
+  : window.location.origin.replace(/vercel\.app/, 'onrender.com');
+
 const form = document.getElementById("formUpload");
 const successMessage = document.getElementById("successMessage");
 const errorMessage = document.getElementById("errorMessage");
@@ -18,7 +23,7 @@ form.addEventListener("submit", async (e) => {
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="bi bi-hourglass-split animate-spin"></i> Enviando...';
 
-    const res = await fetch("/api/fotos", {
+    const res = await fetch(`${API_URL}/api/fotos`, {
       method: "POST",
       body: formData
     });
