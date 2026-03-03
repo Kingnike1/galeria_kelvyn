@@ -3,7 +3,8 @@
   "buildCommand": "npm install",
   "functions": {
     "api/index.js": {
-      "runtime": "nodejs18.x"
+      "runtime": "nodejs18.x",
+      "maxDuration": 30
     }
   },
   "routes": [
@@ -16,15 +17,8 @@
       "dest": "/frontend/img/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "/frontend/$1"
-    },
-    {
-      "src": "/(.*)",
+      "src": "/.*",
       "dest": "/frontend/index.html"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
