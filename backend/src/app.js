@@ -14,17 +14,8 @@ conectarDB();
 const app = express();
 
 // Configurar CORS
-const allowedOrigins = [
-  "http://localhost:3000",
-  "http://localhost:5173",
-  "http://localhost:5174",
-  "https://galeria-kelvyn.vercel.app",
-  process.env.FRONTEND_URL
-].filter(Boolean);
-
 app.use(cors({
-  origin: allowedOrigins,
-  credentials: true
+  origin: "*"
 }));
 
 app.use(express.json());
