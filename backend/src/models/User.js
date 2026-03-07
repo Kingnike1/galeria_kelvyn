@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
-const usuarioSchema = new mongoose.Schema({
+ const usuarioSchema = new mongoose.Schema({
+    nome: {
+        type: String,
+        required: false
+    },
     email: {
         type: String,
         required: true
@@ -10,8 +14,8 @@ const usuarioSchema = new mongoose.Schema({
         required: true
     },
     dataCriacao: {
-    type: Date,
-    default: Date.now
+        type: Date,
+        default: Date.now
     }
 });
 

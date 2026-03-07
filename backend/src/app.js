@@ -38,6 +38,10 @@ app.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "../../frontend/login.html"))
 })
 
+app.get("/dashboard", (req, res) => {
+    res.sendFile(path.join(__dirname, "../../frontend/dashboard.html"))
+})
+
 // Rota raiz - retorna mensagem de API
 app.get("/", (req, res) => {
     res.json({ 

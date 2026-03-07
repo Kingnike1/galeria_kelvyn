@@ -9,7 +9,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "sua_chave_secreta_super_segura_aqu
 // 📝 Registrar novo usuário
 router.post("/registro", async (req, res) => {
   try {
-    const { email, senha } = req.body;
+    const { email, senha, nome } = req.body;
 
     // 🔍 Validações básicas
     if (!email || !senha) {
@@ -40,7 +40,8 @@ router.post("/registro", async (req, res) => {
     // 💾 Criar usuário
     const novoUsuario = new Usuario({
       email,
-      senha: senhaHash
+      senha: senhaHash,
+      nome: nome || email.split('@')[0]
     });
 
     await novoUsuario.save();
@@ -48,7 +49,8 @@ router.post("/registro", async (req, res) => {
     // ❗ Nunca retornar senha
     const usuarioSemSenha = {
       _id: novoUsuario._id,
-      email: novoUsuario.email
+      email: novoUsuario.email,
+      nome: novoUsuario.nome
     };
 
     res.status(201).json(usuarioSemSenha);
@@ -84,7 +86,7 @@ router.post("/login", async (req, res) => {
 
     // 🎫 Gerar token JWT
     const token = jwt.sign(
-      { id: usuario._id, email: usuario.email },
+      { id: usuario._id, email: usuario.email, nome: usuario.nome },
       JWT_SECRET,
       { expiresIn: "7d" }
     );
@@ -93,7 +95,8 @@ router.post("/login", async (req, res) => {
       token,
       usuario: {
         _id: usuario._id,
-        email: usuario.email
+        email: usuario.email,
+        nome: usuario.nome
       }
     });
 
@@ -122,6 +125,16 @@ export const verificarToken = (req, res, next) => {
 // ✅ Verificar se o token é válido
 router.get("/verificar-token", verificarToken, (req, res) => {
   res.json({ valido: true, usuario: req.usuario });
+});
+
+// 👥 Listar todos os usuários (para o dashboard)
+router.get("/users", verificarToken, async (req, res) => {
+    try {
+        const usuarios = await Usuario.find().select("-senha");
+        res.json(usuarios);
+    } catch (error) {
+        res.status(500).json({ error: "Erro ao buscar usuários" });
+    }
 });
 
 export default router;

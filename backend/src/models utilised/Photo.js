@@ -10,11 +10,11 @@ const fotoSchema = new mongoose.Schema({
         required: true
     },
     dataCriacao: {
-    type: Date,
-    default: Date.now
+        type: Date,
+        default: Date.now
     },
     uploadedBy: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema. dealt.Types.ObjectId,
         ref: "Usuario"
     }
 });
