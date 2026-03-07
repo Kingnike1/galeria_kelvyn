@@ -97,3 +97,39 @@ router.post("/fotos", upload.single("image"), async (req, res) => {
 });
 
 export default router;
+
+
+15:31:22.747 Running build in Washington, D.C., USA (East) – iad1
+15:31:22.748 Build machine configuration: 2 cores, 8 GB
+15:31:22.878 Cloning github.com/Kingnike1/galeria_kelvyn (Branch: main, Commit: 69f9b08)
+15:31:22.879 Previous build caches not available.
+15:31:24.928 Cloning completed: 2.049s
+15:31:26.155 Running "vercel build"
+15:31:26.853 Vercel CLI 50.28.0
+15:31:27.708 Installing dependencies...
+15:31:29.779 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+15:31:29.848 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+15:31:29.925 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+15:31:29.973 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+15:31:30.044 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+15:31:30.080 npm warn deprecated gauge@3.0.2: This package is no longer supported.
+15:31:30.175 npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+15:31:30.859 
+15:31:30.860 added 188 packages in 3s
+15:31:30.860 
+15:31:30.860 35 packages are looking for funding
+15:31:30.861   run `npm fund` for details
+15:31:31.588 
+15:31:31.588 up to date, audited 189 packages in 640ms
+15:31:31.589 
+15:31:31.589 35 packages are looking for funding
+15:31:31.589   run `npm fund` for details
+15:31:31.594 
+15:31:31.595 2 high severity vulnerabilities
+15:31:31.595 
+15:31:31.596 To address all issues, run:
+15:31:31.596   npm audit fix
+15:31:31.596 
+15:31:31.596 Run `npm audit` for details.
+15:31:31.615 Error: No Output Directory named "public" found after the Build completed. Configure the Output Directory in your Project Settings. Alternatively, configure vercel.json#outputDirectory.
+15:31:31.616 Learn More: https://vercel.link/missing-public-directory
