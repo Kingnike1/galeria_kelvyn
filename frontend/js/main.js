@@ -55,7 +55,7 @@ async function carregarFotos() {
     // Renderizar novas fotos
     novasFotos.forEach(foto => {
       const div = document.createElement("div");
-      div.className = "group relative overflow-hidden rounded-xl aspect-square";
+      div.className = "group relative overflow-hidden rounded-xl aspect-square cursor-pointer";
 
       div.innerHTML = `
         <img src="${foto.imageUrl}"
@@ -66,6 +66,13 @@ async function carregarFotos() {
       `;
 
       grid.prepend(div);
+
+      // Adicionar evento de clique para abrir modal
+      div.addEventListener("click", () => {
+        const img = div.querySelector("img");
+        const autor = foto.uploadedBy ? `${foto.uploadedBy.nome || 'Desconhecido'}` : 'Autor desconhecido';
+        window.abrirModal(img.src, foto.titulo, autor);
+      });
 
       // Animar entrada da foto
       setTimeout(() => {
