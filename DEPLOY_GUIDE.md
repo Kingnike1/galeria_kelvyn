@@ -60,7 +60,7 @@ FRONTEND_URL=https://seu-dominio-vercel.vercel.app
 
 1. Clique em **"Create Web Service"**
 2. Aguarde o deploy ser concluído (pode levar 2-5 minutos)
-3. Copie a URL fornecida pelo Render (ex: `https://galeria-kelvyn-api.onrender.com`)
+3. Copie a URL fornecida pelo Render (ex: `https://galeria-kelvyn.onrender.com`)
 
 **Importante**: Guarde essa URL, você precisará dela para configurar o frontend!
 
@@ -90,7 +90,7 @@ FRONTEND_URL=https://seu-dominio-vercel.vercel.app
 Clique em **"Environment Variables"** e adicione:
 
 ```
-VITE_API_URL=https://galeria-kelvyn-api.onrender.com
+VITE_API_URL=https://galeria-kelvyn.onrender.com
 ```
 
 **Nota**: Substitua pela URL do seu backend no Render (obtida na Parte 1).
