@@ -6,6 +6,7 @@
   <title>Kelvyn | Fotógrafo</title>
 
   <script src="./js/main.js" defer></script>
+  <script src="./js/auth.js" defer></script>
   
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -48,6 +49,8 @@
         <a href="#galeria" class="hover:text-gray-400 transition">Galeria</a>
         <a href="#sobre" class="hover:text-gray-400 transition">Sobre</a>
         <a href="#contato" class="hover:text-gray-400 transition">Contato</a>
+        <a id="formularioLink" href="/formulario" class="hidden hover:text-gray-400 transition">Upload</a>
+        <a id="dashboardLink" href="/dashboard" class="hidden hover:text-gray-400 transition">Dashboard</a>
         <div id="userMenuDesktop" class="hidden flex items-center gap-4">
           <span id="userEmailDesktop" class="text-sm text-gray-300"></span>
           <button id="logoutBtnDesktop" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition">
@@ -71,6 +74,8 @@
         <a href="#galeria" class="hover:text-gray-400 transition">Galeria</a>
         <a href="#sobre" class="hover:text-gray-400 transition">Sobre</a>
         <a href="#contato" class="hover:text-gray-400 transition">Contato</a>
+        <a id="formularioLinkMobile" href="/formulario" class="hidden hover:text-gray-400 transition">Upload</a>
+        <a id="dashboardLinkMobile" href="/dashboard" class="hidden hover:text-gray-400 transition">Dashboard</a>
         <div id="userMenuMobile" class="hidden flex flex-col gap-3 border-t border-gray-700 pt-4">
           <span id="userEmailMobile" class="text-sm text-gray-300"></span>
           <button id="logoutBtnMobile" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition text-left">

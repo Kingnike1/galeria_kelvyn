@@ -7,6 +7,8 @@ import fotoRotas from "./routes/photo.routes.js";
 import fotoRotass from "./routes/fotos.routes.js";
 import usuarioRotas from "./routes/user.routes.js";
 import { fileURLToPath } from "url";
+import { verificarToken } from "./routes/user.routes.js";
+import verificarAdmin from "./middlewares/verificarAdmin.js";
 
 dotenv.config();
 conectarDB();
@@ -30,7 +32,7 @@ app.use(express.static(path.join(__dirname, "../../frontend")));
 
 app.use("/img", express.static(path.resolve("frontend/img")));
 
-app.get("/formulario", (req, res) => {
+app.get("/formulario", verificarToken, verificarAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, "../../frontend/i.html"))
 })
 
@@ -38,7 +40,7 @@ app.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "../../frontend/login.html"))
 })
 
-app.get("/dashboard", (req, res) => {
+app.get("/dashboard", verificarToken, verificarAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, "../../frontend/dashboard.html"))
 })
 

@@ -13,6 +13,11 @@ import mongoose from "mongoose";
         type: String,
         required: true
     },
+    role: {
+        type: String,
+        enum: ["user", "admin"],
+        default: "user"
+    },
     dataCriacao: {
         type: Date,
         default: Date.now

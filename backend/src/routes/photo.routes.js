@@ -3,10 +3,11 @@ import Fotos from "../models/Photo.js";
 import upload from "../middlewares/upload.js";
 import cloudinary from "../services/cloudinary.js";
 import { verificarToken } from "./user.routes.js";
+import verificarAdmin from "../middlewares/verificarAdmin.js";
 
 const router = express.Router();
 
-router.post("/fotos", verificarToken, upload.single("image"), async (req, res) => {
+router.post("/fotos", verificarToken, verificarAdmin, upload.single("image"), async (req, res) => {
   try {
     console.log("📥 Arquivo recebido:", req.file);
 

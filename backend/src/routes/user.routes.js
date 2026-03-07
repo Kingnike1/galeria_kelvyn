@@ -50,7 +50,8 @@ router.post("/registro", async (req, res) => {
     const usuarioSemSenha = {
       _id: novoUsuario._id,
       email: novoUsuario.email,
-      nome: novoUsuario.nome
+      nome: novoUsuario.nome,
+      role: novoUsuario.role
     };
 
     res.status(201).json(usuarioSemSenha);
@@ -86,7 +87,7 @@ router.post("/login", async (req, res) => {
 
     // 🎫 Gerar token JWT
     const token = jwt.sign(
-      { id: usuario._id, email: usuario.email, nome: usuario.nome },
+      { id: usuario._id, email: usuario.email, nome: usuario.nome, role: usuario.role },
       JWT_SECRET,
       { expiresIn: "7d" }
     );
@@ -96,7 +97,8 @@ router.post("/login", async (req, res) => {
       usuario: {
         _id: usuario._id,
         email: usuario.email,
-        nome: usuario.nome
+        nome: usuario.nome,
+        role: usuario.role
       }
     });
 
