@@ -12,7 +12,7 @@ function criarModal() {
   
   modal.innerHTML = `
     <!-- Fundo com blur -->
-    <div id="modalBackdrop" class="absolute inset-0 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+    <div id="modalBackdrop" class="absolute inset-0 bg-black/80 blur-backdrop opacity-0 transition-opacity duration-300"></div>
     
     <!-- Container da imagem -->
     <div class="absolute inset-0 flex items-center justify-center p-4">
