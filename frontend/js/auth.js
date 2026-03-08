@@ -1,9 +1,6 @@
 // 🔐 Gerenciar autenticação e exibição de elementos baseado em role
 
-const API_URL = window.location.hostname === 'localhost' 
-  ? 'http://localhost:3000' 
-  : window.location.origin.replace(/vercel\.app/, 'onrender.com');
-
+const API_URL = window.API_URL;
 // Função para atualizar a UI baseado no role do usuário
 function atualizarUIBaseadoEmRole() {
   const usuario = JSON.parse(localStorage.getItem("usuario") || "{}");
