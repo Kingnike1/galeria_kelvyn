@@ -55,6 +55,26 @@
         </div>
     </section>
 
+    <!-- USERS MANAGEMENT -->
+    <section id="dashboard-usuarios" class="mb-16">
+        <h3 class="text-3xl text-center mb-8">Gerenciamento de Usuários</h3>
+        <div class="bg-zinc-900 rounded-lg overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-zinc-800 border-b border-zinc-700">
+                    <tr>
+                        <th class="px-6 py-4 text-left text-sm font-semibold">Email</th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold">Nome</th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold">Role</th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="usuarios-table">
+                    <!-- Linhas de usuários serão inseridas aqui -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
     <!-- GALLERY -->
     <section id="dashboard-galeria">
         <h3 class="text-3xl text-center mb-8">Galeria Global</h3>
@@ -67,6 +87,7 @@
     </section>
   </main>
 
+  <script src="./js/auth.js"></script>
   <script src="./js/dashboard.js"></script>
 </body>
 </html>

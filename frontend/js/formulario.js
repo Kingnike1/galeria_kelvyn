@@ -1,9 +1,18 @@
 var API_URL = window.API_URL;
 
-// 🔐 Verificar se o usuário está logado ao carregar a página
+// 🔐 Verificar se o usuário está logado e é administrador
 const token = localStorage.getItem("token");
-if (!token) {
+const usuarioStr = localStorage.getItem("usuario");
+const usuario = usuarioStr ? JSON.parse(usuarioStr) : null;
+
+// Se não está logado, redirecionar para login
+if (!token || !usuario) {
   window.location.href = "/login";
+}
+
+// Se não é administrador, redirecionar para home
+if (usuario.role !== "admin") {
+  window.location.href = "/";
 }
 
 const form = document.getElementById("formUpload");

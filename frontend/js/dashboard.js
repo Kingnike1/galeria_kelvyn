@@ -1,12 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
     var API_URL = window.API_URL || window.location.origin;
 
-    // verificar se usuário está logado
-var token = localStorage.getItem("token");
+    // 🔐 Verificar se usuário está logado e é administrador
+    const token = localStorage.getItem("token");
+    const usuarioStr = localStorage.getItem("usuario");
+    const usuario = usuarioStr ? JSON.parse(usuarioStr) : null;
 
-if (!token) {
-  window.location.href = "/login";
-}
+    if (!token || !usuario) {
+        window.location.href = "/login";
+        return;
+    }
+
+    // Se não é administrador, redirecionar para home
+    if (usuario.role !== "admin") {
+        window.location.href = "/";
+        return;
+    }
 
     const logoutBtn = document.getElementById("logoutBtn");
     logoutBtn.addEventListener("click", () => {
@@ -33,6 +42,7 @@ if (!token) {
             document.getElementById("total-fotos").textContent = fotos.length;
             document.getElementById("total-usuarios").textContent = usuarios.length;
 
+            // 📸 Renderizar galeria de fotos
             const galeriaGrid = document.getElementById("galeria-grid");
             galeriaGrid.innerHTML = ""; // Limpa a galeria
 
@@ -53,9 +63,38 @@ if (!token) {
                 galeriaGrid.appendChild(card);
             });
 
+            // 👥 Renderizar tabela de usuários
+            const usuariosTable = document.getElementById("usuarios-table");
+            if (usuariosTable) {
+                usuariosTable.innerHTML = ""; // Limpa a tabela
+
+                usuarios.forEach(u => {
+                    const row = document.createElement("tr");
+                    row.className = "border-b border-zinc-700 hover:bg-zinc-800/50 transition";
+                    
+                    const roleClass = u.role === "admin" ? "bg-yellow-600/20 text-yellow-400" : "bg-blue-600/20 text-blue-400";
+                    
+                    row.innerHTML = `
+                        <td class="px-6 py-4">${u.email}</td>
+                        <td class="px-6 py-4">${u.nome || 'N/A'}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 rounded-full text-sm ${roleClass}">
+                                ${u.role === "admin" ? "👑 Admin" : "👤 Usuário"}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <button class="change-role-btn px-3 py-1 bg-purple-600 hover:bg-purple-700 rounded text-sm transition" data-id="${u._id}" data-role="${u.role}">
+                                ${u.role === "admin" ? "Remover Admin" : "Tornar Admin"}
+                            </button>
+                        </td>
+                    `;
+                    usuariosTable.appendChild(row);
+                });
+            }
+
             document.getElementById("loadingMessage").classList.add("hidden");
 
-            // Adiciona eventos de clique para os botões de deletar
+            // Adiciona eventos de clique para os botões de deletar fotos
             document.querySelectorAll('.delete-btn').forEach(button => {
                 button.addEventListener('click', async (e) => {
                     const id = e.target.getAttribute('data-id');
@@ -70,6 +109,39 @@ if (!token) {
                         } else {
                             const error = await res.json();
                             alert(`Erro ao excluir foto: ${error.error}`);
+                        }
+                    }
+                });
+            });
+
+            // Adiciona eventos de clique para os botões de alterar role
+            document.querySelectorAll('.change-role-btn').forEach(button => {
+                button.addEventListener('click', async (e) => {
+                    const userId = e.target.getAttribute('data-id');
+                    const currentRole = e.target.getAttribute('data-role');
+                    const newRole = currentRole === "admin" ? "user" : "admin";
+                    
+                    if (confirm(`Tem certeza que deseja ${newRole === "admin" ? "tornar este usuário administrador" : "remover permissões de administrador"}?`)) {
+                        try {
+                            const res = await fetch(`${API_URL}/api/users/${userId}/role`, {
+                                method: 'PUT',
+                                headers: {
+                                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({ role: newRole })
+                            });
+
+                            if (res.ok) {
+                                alert(`Usuário ${newRole === "admin" ? "promovido a administrador" : "removido de administrador"} com sucesso!`);
+                                carregarDashboard(); // Recarrega o dashboard
+                            } else {
+                                const error = await res.json();
+                                alert(`Erro ao alterar role: ${error.error}`);
+                            }
+                        } catch (error) {
+                            console.error("Erro:", error);
+                            alert("Erro ao alterar role do usuário");
                         }
                     }
                 });

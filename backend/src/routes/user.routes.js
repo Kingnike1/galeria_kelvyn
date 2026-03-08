@@ -2,6 +2,7 @@ import express from "express";
 import Usuario from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import verificarAdmin from "../middlewares/verificarAdmin.js";
 
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || "sua_chave_secreta_super_segura_aqui";
@@ -136,6 +137,42 @@ router.get("/users", verificarToken, async (req, res) => {
         res.json(usuarios);
     } catch (error) {
         res.status(500).json({ error: "Erro ao buscar usuários" });
+    }
+});
+
+// 🔄 Alterar role de um usuário (apenas admin)
+router.put("/users/:id/role", verificarToken, verificarAdmin, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { role } = req.body;
+
+        // Validar role
+        if (!role || !["user", "admin"].includes(role)) {
+            return res.status(400).json({ error: "Role inválido. Deve ser 'user' ou 'admin'" });
+        }
+
+        // Encontrar usuário
+        const usuario = await Usuario.findById(id);
+        if (!usuario) {
+            return res.status(404).json({ error: "Usuário não encontrado" });
+        }
+
+        // Atualizar role
+        usuario.role = role;
+        await usuario.save();
+
+        // Retornar usuário atualizado (sem senha)
+        res.json({
+            _id: usuario._id,
+            email: usuario.email,
+            nome: usuario.nome,
+            role: usuario.role,
+            message: `Role alterado para ${role} com sucesso`
+        });
+
+    } catch (error) {
+        console.error("Erro ao alterar role:", error);
+        res.status(500).json({ error: "Erro ao alterar role do usuário" });
     }
 });
 
