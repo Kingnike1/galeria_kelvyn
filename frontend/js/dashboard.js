@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     const API_URL = window.location.origin;
-    const token = localStorage.getItem("token");
 
-    if (!token) {
-        window.location.href = "/login";
-        return;
-    }
+    // verificar se usuário está logado
+const token = localStorage.getItem("token");
+
+if (!token) {
+  window.location.href = "/login";
+}
 
     const logoutBtn = document.getElementById("logoutBtn");
     logoutBtn.addEventListener("click", () => {
