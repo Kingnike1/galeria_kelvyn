@@ -1,5 +1,11 @@
 var API_URL = window.API_URL;
 
+// 🔐 Verificar se o usuário está logado ao carregar a página
+const token = localStorage.getItem("token");
+if (!token) {
+  window.location.href = "/login";
+}
+
 const form = document.getElementById("formUpload");
 const successMessage = document.getElementById("successMessage");
 const errorMessage = document.getElementById("errorMessage");
@@ -15,6 +21,13 @@ form.addEventListener("submit", async (e) => {
   const submitBtn = form.querySelector("button[type='submit']");
   const originalText = submitBtn.innerHTML;
 
+  // 🔑 Obter token do localStorage
+  const tokenAtual = localStorage.getItem("token");
+  if (!tokenAtual) {
+    window.location.href = "/login";
+    return;
+  }
+
   try {
     // Desabilitar botão durante o envio
     submitBtn.disabled = true;
@@ -22,8 +35,24 @@ form.addEventListener("submit", async (e) => {
 
     const res = await fetch(`${API_URL}/api/fotos`, {
       method: "POST",
+      headers: {
+        "Authorization": `Bearer ${tokenAtual}`
+      },
       body: formData
     });
+
+    // Se o token expirou ou é inválido, redirecionar para login
+    if (res.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("usuario");
+      window.location.href = "/login";
+      return;
+    }
+
+    // Se não tem permissão de admin
+    if (res.status === 403) {
+      throw new Error("Você não tem permissão de administrador para enviar fotos.");
+    }
 
     const data = await res.json();
 

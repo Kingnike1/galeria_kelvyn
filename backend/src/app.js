@@ -7,8 +7,6 @@ import fotoRotas from "./routes/photo.routes.js";
 import fotoRotass from "./routes/fotos.routes.js";
 import usuarioRotas from "./routes/user.routes.js";
 import { fileURLToPath } from "url";
-import { verificarToken } from "./routes/user.routes.js";
-import verificarAdmin from "./middlewares/verificarAdmin.js";
 
 dotenv.config();
 conectarDB();
@@ -32,7 +30,10 @@ app.use(express.static(path.join(__dirname, "../../frontend")));
 
 app.use("/img", express.static(path.resolve("frontend/img")));
 
-app.get("/formulario", verificarToken, verificarAdmin, (req, res) => {
+// ℹ️ As rotas de página HTML não devem usar verificarToken no servidor,
+// pois o navegador não consegue enviar cabeçalhos Authorization em navegação normal.
+// A proteção é feita pelo JavaScript do frontend (verificando o token no localStorage).
+app.get("/formulario", (req, res) => {
     res.sendFile(path.join(__dirname, "../../frontend/i.html"))
 })
 
@@ -40,7 +41,7 @@ app.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "../../frontend/login.html"))
 })
 
-app.get("/dashboard", verificarToken, verificarAdmin, (req, res) => {
+app.get("/dashboard", (req, res) => {
     res.sendFile(path.join(__dirname, "../../frontend/dashboard.html"))
 })
 
