@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const API_URL = window.location.origin;
+    var API_URL = window.API_URL || window.location.origin;
 
     // verificar se usuário está logado
-const token = localStorage.getItem("token");
+var token = localStorage.getItem("token");
 
 if (!token) {
   window.location.href = "/login";
@@ -18,8 +18,8 @@ if (!token) {
     async function carregarDashboard() {
         try {
             const [fotosRes, usuariosRes] = await Promise.all([
-                fetch(`${API_URL}/api/fotos`, { headers: { "Authorization": `Bearer ${token}` } }),
-                fetch(`${API_URL}/api/users`, { headers: { "Authorization": `Bearer ${token}` } })
+                fetch(`${API_URL}/api/fotos`, { headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` } }),
+                fetch(`${API_URL}/api/users`, { headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` } })
             ]);
 
             if (fotosRes.status === 401 || usuariosRes.status === 401) {
@@ -62,7 +62,7 @@ if (!token) {
                     if (confirm('Tem certeza que deseja excluir esta foto?')) {
                         const res = await fetch(`${API_URL}/api/fotos/${id}`, {
                             method: 'DELETE',
-                            headers: { "Authorization": `Bearer ${token}` }
+                            headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
                         });
 
                         if (res.ok) {

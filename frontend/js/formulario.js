@@ -1,4 +1,4 @@
-const API_URL = window.API_URL;
+var API_URL = window.API_URL;
 
 const form = document.getElementById("formUpload");
 const successMessage = document.getElementById("successMessage");

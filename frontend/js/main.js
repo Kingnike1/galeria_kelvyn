@@ -1,6 +1,6 @@
 let fotosCarregadas = [];
 
-const API_URL = window.API_URL;
+var API_URL = window.API_URL;
 
 async function carregarFotos() {
   try {

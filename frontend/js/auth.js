@@ -1,10 +1,10 @@
 // 🔐 Gerenciar autenticação e exibição de elementos baseado em role
 
-const API_URL = window.API_URL;
+var API_URL = window.API_URL;
 // Função para atualizar a UI baseado no role do usuário
 function atualizarUIBaseadoEmRole() {
-  const usuario = JSON.parse(localStorage.getItem("usuario") || "{}");
-  const token = localStorage.getItem("token");
+  var usuario = JSON.parse(localStorage.getItem("usuario") || "{}");
+  var token = localStorage.getItem("token");
   
   const userMenuDesktop = document.getElementById("userMenuDesktop");
   const userMenuMobile = document.getElementById("userMenuMobile");

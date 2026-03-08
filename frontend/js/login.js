@@ -1,4 +1,4 @@
-const API_URL = window.API_URL;
+var API_URL = window.API_URL;
 
 // 🔄 Gerenciar abas
 const tabBtns = document.querySelectorAll(".tab-btn");
