@@ -1,9 +1,6 @@
 let fotosCarregadas = [];
 
-// Obter a URL da API do ambiente ou usar localhost como padrão
-const API_URL = window.location.hostname === 'localhost' 
-  ? 'http://localhost:3000' 
-  : window.location.origin.replace(/vercel\.app/, 'onrender.com');
+const API_URL = window.API_URL;
 
 async function carregarFotos() {
   try {
