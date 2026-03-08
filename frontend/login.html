@@ -16,15 +16,36 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+  }
 
-    h1, h2, h3 {
-      font-family: 'Playfair Display', serif;
-    }
-  </style>
+  h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* Classe padrão para inputs */
+  .input-dark {
+    width: 100%;
+    padding: 10px 14px;
+    background-color: #27272a;
+    color: white;
+    border: 1px solid #3f3f46;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.2s ease;
+  }
+
+  .input-dark::placeholder {
+    color: #9ca3af;
+  }
+
+  .input-dark:focus {
+    border-color: white;
+    box-shadow: 0 0 0 1px white;
+  }
+</style>
 </head>
 
 <body class="bg-black text-white min-h-screen flex items-center justify-center">
@@ -65,7 +86,7 @@
             type="email"
             id="loginEmail"
             placeholder="seu@email.com"
-            class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:outline-none focus:border-white transition"
+            class="input-dark"
             required
           />
         </div>
@@ -76,7 +97,7 @@
             type="password"
             id="loginSenha"
             placeholder="••••••••"
-            class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:outline-none focus:border-white transition"
+            class="input-dark"
             required
           />
         </div>
@@ -99,7 +120,7 @@
             type="email"
             id="registroEmail"
             placeholder="seu@email.com"
-            class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:outline-none focus:border-white transition"
+            class="input-dark"
             required
           />
         </div>
@@ -110,7 +131,7 @@
             type="password"
             id="registroSenha"
             placeholder="••••••••"
-            class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:outline-none focus:border-white transition"
+            class="input-dark"
             required
             minlength="6"
           />
@@ -123,7 +144,7 @@
             type="password"
             id="registroSenhaConfirm"
             placeholder="••••••••"
-            class="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:outline-none focus:border-white transition"
+            class="input-dark"
             required
           />
         </div>
